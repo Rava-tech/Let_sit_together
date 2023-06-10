@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Wyniki wyszukiwania</h1>
+
+  <!-- Wyświetlanie mapy -->
+  <div id="map"></div>
+
+  <!-- Skrypty JavaScript do wygenerowania mapy -->
+<script>
+  // Inicjalizacja mapy Leaflet
+  var map = L.map('map').setView([51.505, -0.09], 13); // Wprowadź odpowiednie koordynaty i zoom
+
+  // Dodanie kafelków mapy (tile layer)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    maxZoom: 18,
+  }).addTo(map);
+
+  // Dodanie znacznika (marker) na mapie
+  L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('To jest Twój wynik wyszukiwania!') // Tekst wyświetlany po kliknięciu znacznika
+    .openPopup();
+</script>
+
+  <!-- Wyświetlanie innych informacji dotyczących wyników -->
+  <h2>Informacje dotyczące wyników:</h2>
+  <ul>
+    {% for result in results %}
+      <li>{{ result }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

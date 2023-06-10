@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="header">Witaj na stronie głównej! </h2>
+  <h2 class="header">Szukasz miejsca, które pomieści Twoją liczną ekipę? </h2>
+  <h2 class="header">Dobrze trafiłeś! Wybierz opcję "Wyszukaj swoje miejsce!" aby znaleźć miejsce idealne!</h2>
+{% if user.is_authenticated %}
+        <p class="header">Witaj, {{ user.username }}!</p>
+        <a href="{% url 'logout' %}" class="header">Wyloguj się</a>
+    {% else %}
+        <!-- Wyświetl formularz logowania -->
+        <form method="post" action="{% url 'login' %}" class="header">
+            {% csrf_token %}
+            <!-- Pola formularza logowania -->
+            <!-- ... -->
+            <button type="submit">Zaloguj się</button>
+        </form>
+        <p class="header">Nie masz jeszcze konta? <a href="{% url 'register' %}" class="header">Zarejestruj się</a></p>
+    {% endif %}
+{% endblock %}
