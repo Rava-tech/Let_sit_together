@@ -1,9 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from .models import Klient, Restauracja, Rezerwacja
 
 
 def home(request):
@@ -77,3 +79,26 @@ def search_view(request):
     # Przetwarzanie danych i przygotowanie wyników
     # ...
     return redirect('search_results')
+
+def dodaj_rezerwacje(request):
+    # Pobierz dane z formularza
+    klient_id = request.POST.get('klient_id')
+    restauracja_id = request.POST.get('restauracja_id')
+    data = request.POST.get('data')
+    liczba_osob = request.POST.get('liczba_osob')
+
+    # Utwórz obiekty klienta i restauracji
+    klient = Klient.objects.get(id=klient_id)
+    restauracja = Restauracja.objects.get(id=restauracja_id)
+
+    # Utwórz nową rezerwację
+    rezerwacja = Rezerwacja.objects.create(
+        klient=klient,
+        restauracja=restauracja,
+        data=data,
+        liczba_osob=liczba_osob
+    )
+
+    # Przekieruj użytkownika lub wykonaj inne operacje
+
+    return HttpResponseRedirect('/results/')
