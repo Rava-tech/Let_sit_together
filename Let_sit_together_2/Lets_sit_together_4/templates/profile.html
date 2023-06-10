@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profil użytkownika</title>
+</head>
+<body>
+    <h1 class="header">Profil użytkownika</h1>
+    <p class="header">Witaj, {{ user.username }}!</p>
+    <!-- Dodaj tutaj dowolne informacje i elementy HTML związane z profilem użytkownika -->
+    <a href="{% url 'logout' %}" class="header">Wyloguj się</a>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="header">Wyszukiwanie</h1>
+  <form method="GET" action="{% url 'search' %}" class="header">
+    <label for="places">Ilość miejsc:</label>
+    <input type="number" name="places" id="places" min="0">
+
+    <br>
+
+    <label for="distance" class="header">Odległość od użytkownika (w km):</label>
+    <input type="number" name="distance" id="distance" min="0">
+
+    <br>
+
+    <input type="submit" value="Wyszukaj">
+  </form>
+{% endblock %}

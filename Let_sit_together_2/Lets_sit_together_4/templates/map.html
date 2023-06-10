@@ -1,0 +1,33 @@
+{% load static %}
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Wyniki wyszukiwania</h1>
+<div id="map"></div>
+
+<!-- Dodaj skrypt JavaScript, który utworzy mapę i wyświetli wyniki wyszukiwania -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Pobierz dane z kontekstu renderowania
+    var radius = {{ radius }};
+    // Pobierz bieżącą lokalizację użytkownika
+
+    // Utwórz mapę z odpowiednimi ustawieniami
+    var map = L.map('map').setView([{{ latitude }}, {{ longitude }}], 13);
+
+    // Dodaj warstwę mapy, np. OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+
+    // Dodaj okrąg o podanym promieniu i centrum na bieżącą lokalizację
+    var circle = L.circle([{{ latitude }}, {{ longitude }}], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: radius
+    }).addTo(map);
+});
+</script>
+{% endblock %}
